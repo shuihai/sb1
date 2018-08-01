@@ -37,7 +37,7 @@ public class HelloTests {
     public void getHello2() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/hello2").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Hello World2")));
+                .andExpect(content().string(equalTo("Hello World")));
     }
 
 
