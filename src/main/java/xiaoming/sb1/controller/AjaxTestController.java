@@ -1,66 +1,63 @@
 package xiaoming.sb1.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
-@Controller
-@RequestMapping("ajax" )
-public class AjaxController {
+@RestController
+@RequestMapping("ajaxtest")
+public class AjaxTestController {
 
-    // 从 application.yml 中读取配置，如取不到默认值为Hello Jsp
-    @Value("${application.hello:Hello Jsp}")
-    private String hello = "Hello Jsp";
+    private Gson gson = new Gson();
 
-    /**
-     * 默认页<br/>
-     * @RequestMapping("/") 和 @RequestMapping 是有区别的
-     * 如果不写参数，则为全局默认页，加入输入404页面，也会自动访问到这个页面。
-     * 如果加了参数“/”，则只认为是根页面。
-     * 可以通过localhost:8080或者localhost:8080/index访问该方法
-     */
-    @RequestMapping(value = {"/","/index"})
-    public String index(Map<String, Object> model){
-        // 直接返回字符串，框架默认会去 spring.view.prefix 目录下的 （index拼接spring.view.suffix）页面
-        // 本例为 /WEB-INF/jsp/index.jsp
-        model.put("time", new Date());
-        model.put("message", this.hello);
-        return "index";
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String index( String json,String gogo) {
+//        List<Person> ps = gson.fromJson(str, new TypeToken<List<Person>>(){}.getType());
+        System.out.println(gogo);
+        Type type = new TypeToken<Hehe>() {}.getType();
+        Hehe programList = gson.fromJson(json, type);
+        return gson.toJson(programList);
     }
 
-    /**
-     * 响应到JSP页面page1
-     */
-    @RequestMapping("/page1")
-    public ModelAndView page1(){
-        // 页面位置 /WEB-INF/jsp/page/page.jsp
-        ModelAndView mav = new ModelAndView("page1");
-        mav.addObject("content", hello);
-        return mav;
-    }
 
-    /**
-     * 响应到JSP页面page1（可以直接使用Model封装内容，直接返回页面字符串）
-     */
-    @RequestMapping("/page2")
-    public String page2(Model model){
-        // 页面位置 /WEB-INF/jsp/page/page.jsp
-        model.addAttribute("content", hello + "（第二种）");
-        return "page1";
+    @RequestMapping(value = "/test3", method = RequestMethod.POST)
+    public String index3(@RequestBody String json) {
+        System.out.println(json);
+        Hehe person = gson.fromJson(json, Hehe.class);
+        return gson.toJson(person);
     }
 
 
 
 
 
- 
+
+    @RequestMapping(value = "/test2", method = RequestMethod.POST)
+    public String index(@RequestBody Hehe hehe) {
+
+        System.out.println(hehe.data);
+
+        String json2 = "{\"data\":33}";
+        Hehe person = gson.fromJson(json2, Hehe.class);
+        return gson.toJson(person);
+    }
+
+}
+
+class Hehe {
+    public String data;
 }

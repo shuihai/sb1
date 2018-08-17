@@ -1,16 +1,37 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: xiaofeitt
-  Date: 2018/8/15
-  Time: 14:27
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Spring Boot Sample</title>
+
+
+    <script type="text/javascript" src="/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#b01").click(function(){
+
+                $.ajax({
+                    type: "GET",
+                    url: "/ajaxtest/test?gogo=hehehe",
+                    data: '{"data":"ggg"}',
+                    contentType : 'application/json',
+                    dataType:"json",
+                    success: function(msg){
+                        alert(msg)
+                        alert( "Data Saved: " + msg['data'] );
+                    }
+                });
+            });
+        });
+    </script>
 </head>
+
 <body>
-$END$
+
+
+
+<button id="b01" type="button">改变内容</button>
+
+
 </body>
 </html>

@@ -1,16 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: xiaofeitt
-  Date: 2018/8/15
-  Time: 14:27
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Spring Boot Sample</title>
 </head>
+
 <body>
-$END$
+<h1>${content }</h1>
 </body>
 </html>
