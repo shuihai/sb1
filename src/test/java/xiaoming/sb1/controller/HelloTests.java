@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -28,17 +29,17 @@ public class HelloTests {
 
     @Test
     public void getHello() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/hello").param("key", ""))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Hello World")));
     }
 
-    @Test
-    public void getHello2() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/hello2").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Hello World2")));
-    }
+//    @Test
+//    public void getHello2() throws Exception {
+//        mvc.perform(MockMvcRequestBuilders.get("/hello2").accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(content().string(equalTo("Hello World2")));
+//    }
 
 
 }

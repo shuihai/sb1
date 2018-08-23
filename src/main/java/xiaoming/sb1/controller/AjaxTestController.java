@@ -56,8 +56,50 @@ public class AjaxTestController {
         return gson.toJson(person);
     }
 
+    @RequestMapping(value = "/test4", method = RequestMethod.POST)
+    public String index4( ) {
+        String json2 = "{\"data\":{\"data\":33}}";
+//        Hehe person = gson.fromJson(json2, Hehe.class);
+        System.out.println(gson.toJson(json2));
+        return gson.toJson(json2);
+    }
+
+    //不用tojson
+    @RequestMapping(value = "/test5", method = RequestMethod.POST)
+    public Hehe index5( ) {
+        Hehe hehe=new Hehe("test5");
+        System.out.println("test5");
+        //    return gson.toJson(hehe);
+      return hehe;
+    }
+
+
+    @RequestMapping(value = "/test6", method = RequestMethod.POST)
+    public VodUserResult index6( ) {
+        VodUserResult vodUserResult=new VodUserResult();
+        Hehe hehe=new Hehe("test5");
+        vodUserResult.setMessage("gogo").setResult(hehe);
+        return vodUserResult;
+    }
+
+    @RequestMapping(value = "/test7", method = RequestMethod.POST)
+    public String index7( ) {
+        VodUserResult vodUserResult=new VodUserResult();
+        Hehe hehe=new Hehe("test5");
+        vodUserResult.setMessage("gogo").setResult(hehe);
+        return gson.toJson(vodUserResult);
+    }
 }
 
 class Hehe {
     public String data;
+
+    public  Hehe(String data2){
+         data=data2;
+    }
+    public void setData(String data2) {
+        this.data=data2;
+    }
+
+
 }
