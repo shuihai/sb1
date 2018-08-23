@@ -1,0 +1,77 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://0.0.0.0:8761/eureka/
+  instance:
+      prefer-ip-address: true
+server:
+  port: 8762
+  session:
+    timeout: 30
+  connection-timeout: 30
+spring:
+  application:
+    name: service-hadoop
+  datasource:
+    sparksql:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:hive2://10.0.9.3:20001/default
+      driver-class-name: org.apache.hive.jdbc.HiveDriver
+      username: hadoop
+      password: hadoop
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 600000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      filters: stat,wall,log4j #负载监控功能 此功能不支持hive
+      logSlowSql: true
+      dbType: hive
+    hivesql:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:hive2://10.0.9.2:10000/default
+      driver-class-name: org.apache.hive.jdbc.HiveDriver
+      username: hadoop
+      password: hadoop
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 600000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      filters: stat,wall,log4j #负载监控功能 此功能不支持hive
+      logSlowSql: true
+      dbType: hive
+    oraclesql:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:oracle:thin:@10.0.9.60:1521:db1
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      username: DAMSOLAP
+      password: DAMSOLAP
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 600000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      filters: stat,wall,log4j #负载监控功能 此功能不支持hive
+      logSlowSql: true
+      dbType: oracle
+  http:
+    multipart:
+      maxFileSize: 50000Mb
+      maxRequestSize: 50000Mb
+      enabled: true
